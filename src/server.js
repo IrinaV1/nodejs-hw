@@ -17,23 +17,6 @@ app.use(cors());
 
 app.use(router);
 
-// app.use('/notes', (req, res) => {
-//   res.status(200).json({
-//     message: 'Retrieved all notes',
-//   });
-// });
-
-// app.use('/notes/:noteId', (req, res) => {
-//   const id_param = req.params.noteId;
-//   res.status(200).json({
-//     message: `Retrieved note with ID: ${id_param}`,
-//   });
-// });
-
-app.get('/test-error', (req, res) => {
-  throw new Error('Simulated server error');
-});
-
 app.use(notFoundHandler);
 
 app.use(errorHandler);
