@@ -5,18 +5,14 @@ import { isValidObjectId } from 'mongoose';
 const ValidObjectId = (value, helpers) => {
   return isValidObjectId(value)
     ? value
-    : helpers.error({
-        message: 'Invalid noteId format',
-      });
+    : helpers.message('Invalid noteId format');
 };
 
 export const getAllNotesSchema = {
   [Segments.QUERY]: Joi.object({
     page: Joi.number().integer().min(1).default(1),
     perPage: Joi.number().integer().min(5).max(20).default(10),
-    tag: Joi.string()
-      .valid(...TAGS)
-      .default(''),
+    tag: Joi.string().valid(...TAGS),
     search: Joi.string().default(''),
   }),
 };
@@ -33,7 +29,7 @@ export const createNoteSchema = {
     content: Joi.string().default(''),
     tag: Joi.string()
       .valid(...TAGS)
-      .default(""),
+      .default(TAGS[0]),
   }),
 };
 
