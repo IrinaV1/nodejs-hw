@@ -39,9 +39,11 @@ export const updateNoteSchema = {
   }),
   [Segments.BODY]: Joi.object({
     title: Joi.string().min(1),
-    content: Joi.string().optional(),
+    content: Joi.string().optional().allow(''),
     tag: Joi.string()
       .valid(...TAGS)
       .optional(),
-  }).min(1),
+  })
+    .min(1)
+    .unknown(false),
 };
