@@ -10,6 +10,11 @@ const notesSchema = new Schema(
       enum: TAGS,
       default: TAGS[0],
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
   },
   { timestamps: true },
 );

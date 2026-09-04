@@ -6,7 +6,7 @@ export const getAllNotes = async (req, res) => {
   const { page = 1, perPage = 10, tag, search } = req.query;
   const skip = (page - 1) * perPage;
 
-  const notesQuery = Note.find();
+  const notesQuery = Note.find({userId: req.user._id});
 
   if (tag) {
     notesQuery.where('tag').equals(tag);
@@ -40,7 +40,7 @@ export const getNoteById = async (req, res) => {
 };
 
 export const createNote = async (req, res) => {
-  const newNote = await Note.create(req.body);
+  const newNote = await Note.create({ ...req.body, userId: req.user._id, });
   res.status(201).json(newNote);
 };
 
