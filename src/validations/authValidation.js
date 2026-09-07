@@ -14,3 +14,10 @@ export const loginUserSchema = {
     password: Joi.string().required(),
   }),
 };
+
+export const resetPasswordSchema = {
+  [Segments.BODY]: Joi.object({
+    password: Joi.string().required(),
+    token: Joi.string().required(),
+  }),
+};
