@@ -11,7 +11,7 @@ import fs from 'node:fs/promises';
 
 export const registerUser = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log('EMAIL FROM POSTMAN:', email);
   const existingEmail = await User.findOne({ email });
   if (existingEmail) {
     throw createHttpError(400, 'Email in use');
@@ -92,8 +92,11 @@ export const requestResetEmail = async (req, res) => {
   const { email } = req.body;
 
   const user = await User.findOne({ email });
+
   if (!user) {
-    throw createHttpError(200, 'Password reset email sent successfully');
+    return res
+      .status(200)
+      .json({ message: 'Password reset email sent successfully' });
   }
 
   const resetToken = jwt.sign(
@@ -101,6 +104,7 @@ export const requestResetEmail = async (req, res) => {
     process.env.JWT_SECRET,
     { expiresIn: '15m' },
   );
+
   const templatePath = path.resolve('src/templates/reset-password-email.html');
   const templateSource = await fs.readFile(templatePath, 'utf-8');
   const template = handlebars.compile(templateSource);
@@ -116,7 +120,8 @@ export const requestResetEmail = async (req, res) => {
       subject: 'Reset your password',
       html,
     });
-  } catch {
+  } catch (error) {
+    console.error('EMAIL ERROR:', error);
     throw createHttpError(
       500,
       'Failed to send the email, please try again later.',
@@ -125,18 +130,6 @@ export const requestResetEmail = async (req, res) => {
 
   res.status(200).json({ message: 'Password reset email sent successfully' });
 };
-
-// Зробіть HTML-лист на основі шаблону src/templates/reset-password-email.html
-// (використовуйте handlebars для підстановки даних, таких як ім’я користувача та посилання).
-// Посилання в листі має вести на фронтенд (домен береться з env-змінної FRONTEND_DOMAIN) та мати вигляд:
-// <FRONTEND_DOMAIN>/reset-password?token=<jwt-token>
-
-// Використайте утиліту sendEmail з файлу src/utils/sendMail.js для надсилання листа з посиланням для скиду паролю.
-// В цій утиліті за допомогою пакету nodemailer організуйте
-//  відправку емейла користувачу.
-// Якщо надсилання листа не вдалося, то використовуючи
-//  бібліотеку createHttpError поверніть відповідь зі
-//  сатусом 500 і повідомленням 'Failed to send the email, please try again later.'.
 
 export const resetPassword = async (req, res) => {
   const { password, token } = req.body;

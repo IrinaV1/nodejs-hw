@@ -3,7 +3,6 @@ import {
   loginUserSchema,
   registerUserSchema,
   requestResetEmailSchema,
-  requestResetEmail,
   resetPasswordSchema,
 } from '../validations/authValidation.js';
 import { celebrate } from 'celebrate';
@@ -12,6 +11,7 @@ import {
   logoutUser,
   refreshUserSession,
   registerUser,
+  requestResetEmail,
   resetPassword,
 } from '../controllers/authController.js';
 
