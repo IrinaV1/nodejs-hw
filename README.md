@@ -1,4 +1,3 @@
-# Node.js Homework
 
 ### Backend development with Node.js, Express, and MongoDB
 
