@@ -1,130 +1,51 @@
-# Node.js Homework
+## Express Basics
 
-### Backend development with Node.js, Express, and MongoDB
+**Branch:** [`01-express`](https://github.com/IrinaV1/nodejs-hw/tree/01-express)
 
-A collection of backend homework assignments focused on building and extending REST APIs with Node.js and Express. The project covers server-side development, database integration, authentication, email services, and cloud image storage.
+This assignment introduces the fundamentals of building a web server with Express.js, handling HTTP requests, and organizing middleware.
 
-## Tech Stack
+### Features
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
-![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
+- Set up an Express server using environment variables with `dotenv`.
+- Configure `cors` to allow cross-origin requests.
+- Parse JSON request bodies using `express.json()`.
+- Log HTTP requests using `pino-http`.
+- Implement basic note-related routes.
+- Handle requests to undefined routes with a custom 404 middleware.
+- Handle server errors with a centralized error-handling middleware.
+- Add a test endpoint to simulate server errors.
 
-### Additional Technologies
+### Technologies
 
-- **Authentication & Security:** JSON Web Token (JWT), bcrypt
-- **Email Services:** Nodemailer, SMTP (Brevo)
-- **Image Uploads:** Multer, Cloudinary
-- **Validation:** Joi
-- **Error Handling:** http-errors
-- **Templating:** Handlebars
-- **Environment Variables:** dotenv
-- **Deployment:** Render
-- **Version Control:** Git, GitHub
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 
-## Features
+**Additional libraries:** dotenv, cors, pino-http, nodemon, ESLint, Prettier.
 
-- REST API development with Express.js
-- MongoDB database integration using Mongoose
-- User authentication and protected routes
-- Password reset via email with time-limited JWT tokens
-- Password hashing with bcrypt
-- User avatar uploads using Multer and Cloudinary
-- Request validation and centralized error handling
-- Environment-based configuration
-- API deployment on Render
+### API Endpoints
 
-## Project Structure
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/notes` | Return a message confirming that all notes were retrieved |
+| GET | `/notes/:noteId` | Return a message containing the requested note ID |
+| GET | `/test-error` | Simulate a server error for testing error handling |
 
-The repository contains multiple homework assignments organized into separate Git branches. Each branch represents a stage of backend development.
+### Error Handling
 
-The `05-mail-and-img` branch extends the Express application with email-based password recovery and user avatar uploads.
+- `404 Not Found` — returns `{"message": "Route not found"}` for undefined routes.
+- `500 Internal Server Error` — returns a JSON object containing the error message.
 
-## Live Demo
+### Environment Variables
 
-[**Deployed API on Render**](https://nodejs-hw-5-6fbo.onrender.com/)
-
-## Source Code
-
-[**GitHub Repository**](https://github.com/IrinaV1/nodejs-hw)
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js
-- npm
-- MongoDB database
-
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/IrinaV1/nodejs-hw.git
-   ```
-
-2. Navigate to the project directory:
-
-   ```bash
-   cd nodejs-hw
-   ```
-
-3. Switch to the required homework branch:
-
-   ```bash
-   git checkout 05-mail-and-img
-   ```
-
-4. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-5. Create a `.env` file in the project root and configure the required environment variables.
-
-6. Start the application using the script defined in `package.json`.
-
-## Environment Variables
-
-The application may require the following environment variables, depending on the selected homework branch:
+Create a `.env` file in the project root:
 
 ```env
-PORT=
-MONGO_URL=
-JWT_SECRET=
-FRONTEND_DOMAIN=
-
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
-
-SMTP_HOST=
-SMTP_PORT=
-SMTP_USER=
-SMTP_PASSWORD=
-SMTP_FROM=
+PORT=3000
 ```
 
-**Important:** Never commit your `.env` file or expose database credentials, API keys, SMTP passwords, or JWT secrets in a public repository.
+### Links
 
-## Learning Goals
-
-- Building RESTful APIs with Node.js and Express
-- Working with MongoDB and Mongoose
-- Implementing authentication and password recovery
-- Sending transactional emails
-- Handling file uploads and cloud storage
-- Validating requests and managing errors
-- Configuring and deploying backend applications
-
-## Author
-
-**Irina V.**
-
-[GitHub Profile](https://github.com/IrinaV1)
+- [Source Code — Branch 01-express](https://github.com/IrinaV1/nodejs-hw/tree/01-express)
+- [GitHub Repository](https://github.com/IrinaV1/nodejs-hw)
+- [Live Demo on Render](https://nodejs-hw-anjf.onrender.com/)
