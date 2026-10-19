@@ -1,51 +1,65 @@
-## Express Basics
+## Validation, Filtering and Pagination
 
-**Branch:** [`01-express`](https://github.com/IrinaV1/nodejs-hw/tree/01-express)
+**Branch:** [`03-validation`](https://github.com/IrinaV1/nodejs-hw/tree/03-validation)
 
-This assignment introduces the fundamentals of building a web server with Express.js, handling HTTP requests, and organizing middleware.
+This assignment extends the Express application with note filtering, pagination, and request validation.
 
 ### Features
 
-- Set up an Express server using environment variables with `dotenv`.
-- Configure `cors` to allow cross-origin requests.
-- Parse JSON request bodies using `express.json()`.
-- Log HTTP requests using `pino-http`.
-- Implement basic note-related routes.
-- Handle requests to undefined routes with a custom 404 middleware.
-- Handle server errors with a centralized error-handling middleware.
-- Add a test endpoint to simulate server errors.
+- Filter notes by tag using the `tag` query parameter.
+- Search notes by title and content using regular expressions.
+- Paginate the notes collection with `page` and `perPage` query parameters.
+- Validate query parameters, route parameters, and request bodies.
+- Validate MongoDB ObjectIds before processing note requests.
+- Handle validation errors using `celebrate`.
+- Handle 404 and server errors.
+- Connect to MongoDB using environment variables.
 
 ### Technologies
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)
+![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=flat)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 
-**Additional libraries:** dotenv, cors, pino-http, nodemon, ESLint, Prettier.
+**Additional libraries:** Celebrate, Joi, dotenv, http-errors.
 
-### API Endpoints
+### API
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/notes` | Return a message confirming that all notes were retrieved |
-| GET | `/notes/:noteId` | Return a message containing the requested note ID |
-| GET | `/test-error` | Simulate a server error for testing error handling |
+| GET | `/notes` | Get notes with filtering, search, and pagination |
+| GET | `/notes/:noteId` | Get a note by ID |
+| POST | `/notes` | Create a note |
+| PATCH | `/notes/:noteId` | Update a note |
+| DELETE | `/notes/:noteId` | Delete a note |
 
-### Error Handling
+### Query Parameters
 
-- `404 Not Found` — returns `{"message": "Route not found"}` for undefined routes.
-- `500 Internal Server Error` — returns a JSON object containing the error message.
+The `GET /notes` endpoint supports:
+
+- `page` — page number, default: `1`.
+- `perPage` — number of notes per page, default: `10`, allowed range: `5–20`.
+- `tag` — filter notes by tag.
+- `search` — search note titles and content.
+
+Example:
+
+`GET /notes?page=1&perPage=10&tag=Todo&search=hello`
 
 ### Environment Variables
 
-Create a `.env` file in the project root:
+Create a `.env` file and configure:
 
 ```env
-PORT=3000
+PORT=3030
+MONGO_URL=your_mongodb_connection_string
 ```
 
 ### Links
 
-- [Source Code — Branch 01-express](https://github.com/IrinaV1/nodejs-hw/tree/01-express)
+- [Source Code — Branch 03-validation](https://github.com/IrinaV1/nodejs-hw/tree/03-validation)
 - [GitHub Repository](https://github.com/IrinaV1/nodejs-hw)
-- [Live Demo on Render](https://nodejs-hw-anjf.onrender.com/)
+- [Live Demo on Render](https://nodejs-hw-3-amqn.onrender.com/)
+
