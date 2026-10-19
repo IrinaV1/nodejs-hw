@@ -1,4 +1,4 @@
-## Homework 04 — Authentication and Sessions
+## Authentication and Sessions
 
 **Branch:** [`04-auth`](https://github.com/IrinaV1/nodejs-hw/tree/04-auth)
 
