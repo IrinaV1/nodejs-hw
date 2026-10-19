@@ -1,65 +1,53 @@
-## Validation, Filtering and Pagination
+## Authentication and Sessions
 
-**Branch:** [`03-validation`](https://github.com/IrinaV1/nodejs-hw/tree/03-validation)
+**Branch:** [`04-auth`](https://github.com/IrinaV1/nodejs-hw/tree/04-auth)
 
-This assignment extends the Express application with note filtering, pagination, and request validation.
+This stage extends the Express application with user authentication, session management, and private note collections.
 
 ### Features
 
-- Filter notes by tag using the `tag` query parameter.
-- Search notes by title and content using regular expressions.
-- Paginate the notes collection with `page` and `perPage` query parameters.
-- Validate query parameters, route parameters, and request bodies.
-- Validate MongoDB ObjectIds before processing note requests.
-- Handle validation errors using `celebrate`.
-- Handle 404 and server errors.
-- Connect to MongoDB using environment variables.
+- User registration and login
+- Password hashing with bcrypt
+- Session creation and refresh using access and refresh tokens
+- Secure HTTP-only cookies for session management
+- User logout and session deletion
+- Authentication middleware for protected routes
+- Private note collections associated with individual users
+- Request validation and error handling
+- MongoDB integration with Mongoose
 
 ### Technologies
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)
-![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=flat)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-**Additional libraries:** Celebrate, Joi, dotenv, http-errors.
+**Additional libraries:**
+- `bcrypt` — password hashing
+- `celebrate` and `Joi` — request validation
+- `cookie-parser` — cookie parsing
+- `http-errors` — HTTP error handling
+- `dotenv` — environment variable management
 
-### API
+### Authentication Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/notes` | Get notes with filtering, search, and pagination |
-| GET | `/notes/:noteId` | Get a note by ID |
-| POST | `/notes` | Create a note |
-| PATCH | `/notes/:noteId` | Update a note |
-| DELETE | `/notes/:noteId` | Delete a note |
+| POST | `/auth/register` | Register a new user |
+| POST | `/auth/login` | Log in |
+| POST | `/auth/refresh` | Refresh the session |
+| POST | `/auth/logout` | Log out |
 
-### Query Parameters
+### Notes API
 
-The `GET /notes` endpoint supports:
+Note routes require authentication. Each user can access and manage only their own notes.
 
-- `page` — page number, default: `1`.
-- `perPage` — number of notes per page, default: `10`, allowed range: `5–20`.
-- `tag` — filter notes by tag.
-- `search` — search note titles and content.
+### Deployment
 
-Example:
+[**Live API on Render**](https://nodejs-hw-5-6fbo.onrender.com/)
 
-`GET /notes?page=1&perPage=10&tag=Todo&search=hello`
+### Source Code
 
-### Environment Variables
-
-Create a `.env` file and configure:
-
-```env
-PORT=3030
-MONGO_URL=your_mongodb_connection_string
-```
-
-### Links
-
-- [Source Code — Branch 03-validation](https://github.com/IrinaV1/nodejs-hw/tree/03-validation)
-- [GitHub Repository](https://github.com/IrinaV1/nodejs-hw)
-- [Live Demo on Render](https://nodejs-hw-3-amqn.onrender.com/)
-
+[**GitHub Repository**](https://github.com/IrinaV1/nodejs-hw)

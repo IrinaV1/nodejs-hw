@@ -4,15 +4,13 @@ import createHttpError from 'http-errors';
 import jwt from 'jsonwebtoken';
 import { sendEmail } from '../utils/sendMail.js';
 import { createSession, setSessionCookies } from '../services/auth.js';
-import Session from '../models/session.js';
-import handlebars from 'handlebars';
-import path from 'node:path';
-import fs from 'node:fs/promises';
+import { Session } from '../models/session.js';
 
 export const registerUser = async (req, res) => {
   const { email, password } = req.body;
-  console.log('EMAIL FROM POSTMAN:', email);
+console.log('email:', email);
   const existingEmail = await User.findOne({ email });
+  console.log('existingEmail:', existingEmail);
   if (existingEmail) {
     throw createHttpError(400, 'Email in use');
   }
