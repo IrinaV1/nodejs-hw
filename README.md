@@ -1,53 +1,52 @@
-## Authentication and Sessions
+##  Express Basics
 
-**Branch:** [`04-auth`](https://github.com/IrinaV1/nodejs-hw/tree/04-auth)
+**Branch:** [`01-express`](https://github.com/IrinaV1/nodejs-hw/tree/01-express)
 
-This stage extends the Express application with user authentication, session management, and private note collections.
+This assignment introduces the fundamentals of building a web server with Express.js, handling HTTP requests, and organizing middleware.
 
 ### Features
 
-- User registration and login
-- Password hashing with bcrypt
-- Session creation and refresh using access and refresh tokens
-- Secure HTTP-only cookies for session management
-- User logout and session deletion
-- Authentication middleware for protected routes
-- Private note collections associated with individual users
-- Request validation and error handling
-- MongoDB integration with Mongoose
+- Set up an Express server using environment variables with `dotenv`.
+- Configure `cors` to allow cross-origin requests.
+- Parse JSON request bodies using `express.json()`.
+- Log HTTP requests using `pino-http`.
+- Implement basic note-related routes.
+- Handle requests to undefined routes with a custom 404 middleware.
+- Handle server errors with a centralized error-handling middleware.
+- Add a test endpoint to simulate server errors.
 
 ### Technologies
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 
-**Additional libraries:**
-- `bcrypt` — password hashing
-- `celebrate` and `Joi` — request validation
-- `cookie-parser` — cookie parsing
-- `http-errors` — HTTP error handling
-- `dotenv` — environment variable management
+**Additional libraries:** dotenv, cors, pino-http, nodemon, ESLint, Prettier.
 
-### Authentication Endpoints
+### API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| POST | `/auth/register` | Register a new user |
-| POST | `/auth/login` | Log in |
-| POST | `/auth/refresh` | Refresh the session |
-| POST | `/auth/logout` | Log out |
+| GET | `/notes` | Return a message confirming that all notes were retrieved |
+| GET | `/notes/:noteId` | Return a message containing the requested note ID |
+| GET | `/test-error` | Simulate a server error for testing error handling |
 
-### Notes API
+### Error Handling
 
-Note routes require authentication. Each user can access and manage only their own notes.
+- `404 Not Found` — returns `{"message": "Route not found"}` for undefined routes.
+- `500 Internal Server Error` — returns a JSON object containing the error message.
 
-### Deployment
+### Environment Variables
 
-[**Live API on Render**](https://nodejs-hw-5-6fbo.onrender.com/)
+Create a `.env` file in the project root:
 
-### Source Code
+```env
+PORT=3000
+```
 
-[**GitHub Repository**](https://github.com/IrinaV1/nodejs-hw)
+### Links
+
+- [Source Code — Branch 01-express](https://github.com/IrinaV1/nodejs-hw/tree/01-express)
+- [GitHub Repository](https://github.com/IrinaV1/nodejs-hw)
+- [Live Demo on Render](https://nodejs-hw-anjf.onrender.com/)
+
